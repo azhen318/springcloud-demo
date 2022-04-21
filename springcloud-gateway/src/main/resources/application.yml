@@ -10,9 +10,9 @@ spring:
   application:
     name: GATEWAY
   redis:
-    host: 100.71.164.43
-    port: 20001
-    password: redis765321
+    host: 15646
+    port: 156464
+    password: 1546
     database: 2
 
   cloud:
