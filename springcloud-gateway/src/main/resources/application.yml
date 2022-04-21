@@ -1,0 +1,45 @@
+server:
+  port: 6666
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1111/eureka/
+
+spring:
+  application:
+    name: GATEWAY
+  redis:
+    host: 100.71.164.43
+    port: 20001
+    password: redis765321
+    database: 2
+
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: client
+          uri: lb://EUREKA-CLIENT
+          predicates:
+            - Path=/client/**
+            - Cookie=name,azhen
+          filters:
+            #限流器
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 2
+                redis-rate-limiter.burstCapacity: 5
+                key-resolver: '#{@hostAddrKeyResolver}'
+        - id: ribbon
+          uri: lb://SPRINGCLOUD-RIBBON
+          predicates:
+            - Path=/ribbon/**
+            - Cookie=name,azhen
+        - id: feign
+          uri: lb://SPRINGCLOUD-FEIGIN
+          predicates:
+            - Path=/feign/**
+            - Cookie=name,azhen

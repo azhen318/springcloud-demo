@@ -13,10 +13,23 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>springcloud-demo</name>
     <description>Demo project for Spring Boot</description>
+    <packaging>pom</packaging>
 
     <properties>
         <java.version>1.8</java.version>
+        <spring-cloud.version>2021.0.0</spring-cloud.version>
+        <orgspringcloud.version>0.0.1-SNAPSHOT</orgspringcloud.version>
     </properties>
+
+    <modules>
+        <module>springcloud-eureka</module>
+        <module>springcloud-ribbon</module>
+        <module>springcloud-feign</module>
+        <module>springcloud-common</module>
+        <module>springcloud-gateway</module>
+    </modules>
+
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -29,6 +42,23 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-parent</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.example</groupId>
+                <artifactId>springcloud-model</artifactId>
+                <version>${orgspringcloud.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <plugins>
