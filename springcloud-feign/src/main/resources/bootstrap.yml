@@ -1,6 +1,15 @@
 spring:
   application:
     name: springcloud-feigin
+  cloud:
+    config:
+      profile: dev
+      discovery:
+        enabled: true
+        service-id: config-server
+      username: config
+      password: password123
+
 
 
 server:

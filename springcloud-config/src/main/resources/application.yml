@@ -1,0 +1,26 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: config-server
+  #配置文件在本地
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        #配置文件本地位置
+        native:
+          search-locations: classpath:/config/
+  security:
+    user:
+      name: config
+      password: password123
+
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1111/eureka/
